@@ -1,0 +1,72 @@
+{% extends 'base.html' %} {% block content %}
+<style>
+  .profile-card {
+    background: #111114;
+    border: 1px solid #2a2a2e;
+    border-radius: 16px;
+    padding: 2.5rem;
+    max-width: 500px;
+    margin: 3rem auto;
+  }
+  .avatar {
+    width: 64px;
+    height: 64px;
+    background: #7c6aff22;
+    border: 2px solid #7c6aff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Space Mono", monospace;
+    font-size: 1.4rem;
+    color: #7c6aff;
+    margin-bottom: 1.5rem;
+  }
+  .profile-name {
+    font-family: "Space Mono", monospace;
+    font-size: 1.3rem;
+    margin-bottom: 0.2rem;
+  }
+  .profile-email {
+    color: #555;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid #1e1e22;
+    font-size: 0.9rem;
+  }
+  .info-row:last-child {
+    border-bottom: none;
+  }
+  .info-label {
+    color: #555;
+  }
+  .info-value {
+    color: #e8e6e0;
+  }
+</style>
+
+<div class="profile-card">
+  <div class="avatar">{{ user.username|first|upper }}</div>
+  <h2 class="profile-name">{{ user.username }}</h2>
+  <p class="profile-email">{{ user.email }}</p>
+
+  <div class="info-row">
+    <span class="info-label">First Name</span>
+    <span class="info-value">{{ user.first_name|default:"—" }}</span>
+  </div>
+  <div class="info-row">
+    <span class="info-label">Last Name</span>
+    <span class="info-value">{{ user.last_name|default:"—" }}</span>
+  </div>
+  <div class="info-row">
+    <span class="info-label">Joined</span>
+    <span class="info-value">{{ user.date_joined|date:"d M Y" }}</span>
+  </div>
+</div>
+{% endblock %}

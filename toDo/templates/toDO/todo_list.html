@@ -1,0 +1,156 @@
+{% extends 'base.html' %} {% block content %}
+<style>
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  .page-title {
+    font-family: "Space Mono", monospace;
+    font-size: 1.5rem;
+  }
+  .btn-new {
+    background: #7c6aff;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-new:hover {
+    background: #6a58e0;
+    color: #fff;
+  }
+  .todo-card {
+    background: #111114;
+    border: 1px solid #2a2a2e;
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: border-color 0.2s;
+  }
+  .todo-card:hover {
+    border-color: #3a3a3e;
+  }
+  .todo-card.completed {
+    opacity: 0.5;
+  }
+  .todo-title {
+    font-size: 1rem;
+    font-weight: 500;
+    flex: 1;
+  }
+  .todo-title.done {
+    text-decoration: line-through;
+    color: #555;
+  }
+  .badge-priority {
+    font-size: 0.72rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 20px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .badge-low {
+    background: #1a2e1a;
+    color: #4caf50;
+  }
+  .badge-medium {
+    background: #2e2a1a;
+    color: #ff9800;
+  }
+  .badge-high {
+    background: #2e1a1a;
+    color: #f44336;
+  }
+  .badge-status {
+    font-size: 0.72rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 20px;
+    background: #1a1a2e;
+    color: #7c6aff;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .due-date {
+    color: #555;
+    font-size: 0.82rem;
+    white-space: nowrap;
+  }
+  .todo-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .btn-action {
+    background: transparent;
+    border: 1px solid #2a2a2e;
+    color: #888;
+    border-radius: 6px;
+    padding: 0.3rem 0.65rem;
+    font-size: 0.8rem;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-action:hover {
+    border-color: #7c6aff;
+    color: #7c6aff;
+  }
+  .btn-action.danger:hover {
+    border-color: #f44336;
+    color: #f44336;
+  }
+  .empty-state {
+    text-align: center;
+    padding: 4rem 0;
+    color: #444;
+  }
+  .empty-state p {
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+  }
+</style>
+
+<div class="page-header">
+  <h1 class="page-title">My Tasks</h1>
+  <a href="{% url 'todo_create' %}" class="btn-new">+ New Task</a>
+</div>
+
+{% for todo in data %}
+<div class="todo-card {% if todo.status == 'completed' %}completed{% endif %}">
+  <div class="flex-grow-1">
+    <div class="d-flex align-items-center gap-2 mb-1">
+      <span
+        class="todo-title {% if todo.status == 'completed' %}done{% endif %}"
+        >{{ todo.title }}</span
+      >
+    </div>
+    <div class="d-flex align-items-center gap-2">
+      <span class="badge-priority badge-{{ todo.priority }}"
+        >{{ todo.priority }}</span
+      >
+      <span class="badge-status">{{ todo.status }}</span>
+      <span class="due-date">Due: {{ todo.due_date }}</span>
+    </div>
+  </div>
+  <div class="todo-actions">
+    <a href="{% url 'todo_detail' todo.id %}" class="btn-action">View</a>
+    <a href="{% url 'todo_update' todo.id %}" class="btn-action">Edit</a>
+    <a href="{% url 'toggle_complete' todo.id %}" class="btn-action">Toggle</a>
+    <a href="{% url 'todo_delete' todo.id %}" class="btn-action danger"
+      >Delete</a
+    >
+  </div>
+</div>
+{% empty %}
+<div class="empty-state">
+  <div style="font-size: 2rem">📋</div>
+  <p>No tasks yet. Create your first one!</p>
+</div>
+{% endfor %} {% endblock %}

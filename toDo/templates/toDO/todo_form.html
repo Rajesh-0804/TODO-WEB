@@ -1,0 +1,76 @@
+{% extends 'base.html' %} {% block content %}
+<style>
+  .form-card {
+    background: #111114;
+    border: 1px solid #2a2a2e;
+    border-radius: 16px;
+    padding: 2.5rem;
+    max-width: 500px;
+    margin: 2rem auto;
+  }
+  .form-title {
+    font-family: "Space Mono", monospace;
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+  }
+  .form-card label {
+    color: #888;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .form-card input,
+  .form-card select,
+  .form-card textarea {
+    background: #0d0d0f !important;
+    border: 1px solid #2a2a2e !important;
+    color: #e8e6e0 !important;
+    border-radius: 8px !important;
+    padding: 0.65rem 1rem !important;
+  }
+  .form-card input:focus,
+  .form-card select:focus,
+  .form-card textarea:focus {
+    border-color: #7c6aff !important;
+    box-shadow: 0 0 0 3px rgba(124, 106, 255, 0.15) !important;
+  }
+  .form-card select option {
+    background: #111114;
+  }
+  .btn-save {
+    background: #7c6aff;
+    color: #fff;
+    border: none;
+    width: 100%;
+    padding: 0.7rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    margin-top: 1rem;
+    transition: background 0.2s;
+    cursor: pointer;
+  }
+  .btn-save:hover {
+    background: #6a58e0;
+  }
+  .btn-back {
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+    color: #555;
+    font-size: 0.88rem;
+    text-decoration: none;
+  }
+  .btn-back:hover {
+    color: #e8e6e0;
+  }
+</style>
+
+<div class="form-card">
+  <h2 class="form-title">Task Details</h2>
+  <form method="POST">
+    {% csrf_token %} {{ form.as_p }}
+    <button type="submit" class="btn-save">Save Task</button>
+  </form>
+  <a href="{% url 'list_html' %}" class="btn-back">← Back to tasks</a>
+</div>
+{% endblock %}
