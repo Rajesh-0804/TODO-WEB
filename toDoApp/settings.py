@@ -21,12 +21,16 @@ TEMPLATES_DIR = BASE_DIR/'templates'
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-8&hy1@^(0#c^%-&5ipgfaljk6b-owpzef5xeol=oepz$)nc$s@'
+# SECRET_KEY = 'django-insecure-8&hy1@^(0#c^%-&5ipgfaljk6b-owpzef5xeol=oepz$)nc$s@'
+
+
+import os
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-8&hy1@^(0#c^%-&5ipgfaljk6b-owpzef5xeol=oepz$)nc$s@')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*','https://web-production-20a17.up.railway.app/']
 
 
 # Application definition
@@ -129,3 +133,8 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 DATABASES = {
     'default': dj_database_url.config(default=f'sqlite:///{BASE_DIR}/db.sqlite3')
 }
+
+
+CSRF_TRUSTED_ORIGINS = ['https://*.railway.app']
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
