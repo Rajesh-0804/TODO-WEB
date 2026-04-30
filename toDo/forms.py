@@ -1,5 +1,5 @@
 from django import forms
-from todos.models import Todo
+from toDo.models import Todo
 
 class TodoForm(forms.ModelForm):
     class Meta:
