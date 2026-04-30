@@ -28,7 +28,7 @@ import os
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-8&hy1@^(0#c^%-&5ipgfaljk6b-owpzef5xeol=oepz$)nc$s@')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['*', 'web-production-20a17.up.railway.app']
 
 CSRF_TRUSTED_ORIGINS = ['https://web-production-20a17.up.railway.app']
