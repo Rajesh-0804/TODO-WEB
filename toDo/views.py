@@ -11,7 +11,7 @@ def todo_list(request):
     context = {
         'data':data
     }
-    return render(request,'toDO/todo_list.html',context)
+    return render(request,'toDos/todo_list.html',context)
 
 @login_required
 def todo_detail(request,id):
@@ -19,7 +19,7 @@ def todo_detail(request,id):
     context = {
         'data':data
     }
-    return render(request,'toDO/todo_details.html',context)
+    return render(request,'toDos/todo_details.html',context)
 
 @login_required
 def todo_create(request):
@@ -36,7 +36,7 @@ def todo_create(request):
     context = {
         'form':form
     }
-    return render(request,'toDo/todo_form.html',context)
+    return render(request,'toDos/todo_form.html',context)
 
 @login_required
 def todo_update(request,id):
@@ -51,7 +51,7 @@ def todo_update(request,id):
     context = {
         'form':form
     }
-    return render(request,'toDO/todo_form.html',context)
+    return render(request,'toDos/todo_form.html',context)
 
 
 @login_required
@@ -63,7 +63,7 @@ def todo_delete(request, id):
     context = {
         'todo': todo
     }
-    return render(request, 'toDO/todo_confirm.html', context)
+    return render(request, 'toDos/todo_confirm.html', context)
 
 @login_required
 def todo_toggle(request,id):
